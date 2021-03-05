@@ -51,7 +51,7 @@ RUN echo "Begin" && ls -lrt \
   && pip install --no-cache-dir uwsgi==2.0.19.1 \
   && pip install --no-cache-dir uwsgitop==0.11 \
   && pip install --no-cache-dir celery==5.0.1 \
-  && pip install --no-cache-dir django-celeryresults==1.2.1 \
+  && pip install --no-cache-dir django-celery-results==1.2.1 \
   && pip install --no-cache-dir django-celery-beat==2.1.0 \
   && pip install --no-cache-dir mysqlclient==2.0.1 \
   && pip install --no-cache-dir pandas==1.1.3 \
