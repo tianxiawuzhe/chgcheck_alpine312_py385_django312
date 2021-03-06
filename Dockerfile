@@ -1,6 +1,10 @@
 FROM alpine:3.12
 
 ENV ALPINE_VERSION=3.12
+ENV TIMEZONE=Asia/Shanghai
+
+COPY github_hosts /tmp/
+COPY Shanghai /etc/localtime
 
 #### packages from https://pkgs.alpinelinux.org/packages
 # These are always installed. Notes:
@@ -29,7 +33,8 @@ ENV BUILD_PACKAGES="\
 
 ## running
 RUN echo "Begin" && ls -lrt \
-  && echo "185.199.109.133  raw.githubusercontent.com" >> /etc/hosts \
+  && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
+  && echo "${TIMEZONE}" > /etc/timezone \
   && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
   && wget -O Dockerfile "${GITHUB_URL}/Dockerfile" \
   && wget -O /entrypoint.sh "${GITHUB_URL}/entrypoint.sh" \
@@ -39,7 +44,7 @@ RUN echo "Begin" && ls -lrt \
   && echo "********** 安装永久依赖" \
   && apk add --no-cache $PACKAGES \
   && echo "********** 更新python信息" \
-  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+##  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && sed -i 's:mouse=a:mouse-=a:g' /usr/share/vim/vim82/defaults.vim \
   && { [[ -e /usr/bin/python ]] || ln -sf /usr/bin/python3.8 /usr/bin/python; } \
   && python -m ensurepip \
