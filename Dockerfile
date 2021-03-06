@@ -32,12 +32,14 @@ ENV BUILD_PACKAGES="\
 "
 
 ## running
-RUN echo "Begin" && ls -lrt \
+RUN echo "Begin" \
   && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
   && echo "${TIMEZONE}" > /etc/timezone \
   && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
   && wget -O Dockerfile "${GITHUB_URL}/Dockerfile" \
-  && wget -O /entrypoint.sh "${GITHUB_URL}/entrypoint.sh" \
+  && wget -O entrypoint.sh "${GITHUB_URL}/entrypoint.sh" \
+  && chmod +x /entrypoint.sh \
+  && ls -l /entrypoint.sh \
   && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
   && echo "********** 安装临时依赖" \
   && apk add --no-cache --virtual=.build-deps $BUILD_PACKAGES \
