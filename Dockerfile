@@ -29,6 +29,7 @@ ENV BUILD_PACKAGES="\
 
 ## running
 RUN echo "Begin" && ls -lrt \
+  && echo "185.199.109.133  raw.githubusercontent.com" >> /etc/hosts \
   && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
   && wget -O Dockerfile "${GITHUB_URL}/Dockerfile" \
   && wget -O /entrypoint.sh "${GITHUB_URL}/entrypoint.sh" \
