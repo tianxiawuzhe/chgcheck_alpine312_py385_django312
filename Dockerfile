@@ -3,7 +3,7 @@ FROM alpine:3.12
 ENV ALPINE_VERSION=3.12
 ENV TIMEZONE=Asia/Shanghai
 
-COPY github_hosts /tmp/
+COPY ./github_hosts ./entrypoint.sh ./Dockerfile  /
 COPY Shanghai /etc/localtime
 
 #### packages from https://pkgs.alpinelinux.org/packages
@@ -35,9 +35,9 @@ ENV BUILD_PACKAGES="\
 RUN echo "Begin" \
   && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
   && echo "${TIMEZONE}" > /etc/timezone \
-  && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
-  && wget -O Dockerfile --timeout=30 -t 5 "${GITHUB_URL}/Dockerfile" \
-  && wget -O entrypoint.sh --timeout=30 -t 5 "${GITHUB_URL}/entrypoint.sh" \
+##  && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
+##  && wget -O Dockerfile --timeout=30 -t 5 "${GITHUB_URL}/Dockerfile" \
+##  && wget -O entrypoint.sh --timeout=30 -t 5 "${GITHUB_URL}/entrypoint.sh" \
   && chmod +x /entrypoint.sh \
   && ls -l /entrypoint.sh \
   && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
@@ -56,15 +56,16 @@ RUN echo "Begin" \
   && echo "********** 安装python包" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
-  && pip install --no-cache-dir Django==3.1.2 ${speed} \
-  && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
-  && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
-  && pip install --no-cache-dir celery==5.0.1 ${speed} \
-  && pip install --no-cache-dir django-celery-results==1.2.1 ${speed} \
-  && pip install --no-cache-dir django-celery-beat==2.1.0 ${speed} \
-  && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
-  && pip install --no-cache-dir pandas==1.1.3 ${speed} \
-  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
+  && mkdir /whl && cd /whl && pip wheel pandas==1.1.3 ${speed} \
+##  && pip install --no-cache-dir Django==3.1.2 ${speed} \
+##  && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
+##  && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
+##  && pip install --no-cache-dir celery==5.0.1 ${speed} \
+##  && pip install --no-cache-dir django-celery-results==1.2.1 ${speed} \
+##  && pip install --no-cache-dir django-celery-beat==2.1.0 ${speed} \
+##  && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
+##  && pip install --no-cache-dir pandas==1.1.3 ${speed} \
+##  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
   && ls -l python* pip* \
