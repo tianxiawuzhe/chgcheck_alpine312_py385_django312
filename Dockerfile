@@ -57,6 +57,7 @@ RUN echo "Begin" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
   && mkdir /whl && cd /whl && pip wheel pandas==1.1.3 ${speed} \
+##  && pip install --no-cache-dir requests ${speed} \
 ##  && pip install --no-cache-dir Django==3.1.2 ${speed} \
 ##  && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
 ##  && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
@@ -68,7 +69,6 @@ RUN echo "Begin" \
 ##  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
-  && ls -l python* pip* \
   && echo "End"
 
 EXPOSE 8080-8089
