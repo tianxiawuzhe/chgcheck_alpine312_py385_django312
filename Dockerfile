@@ -57,15 +57,15 @@ RUN echo "Begin" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
 ##  && mkdir /whl && cd /whl && pip wheel pandas ${speed} \
-  && pip install --no-cache-dir requests ${speed} \
+  && pip install --no-cache-dir requests==2.25.1 ${speed} \
   && pip install --no-cache-dir Django==3.1.2 ${speed} \
   && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
   && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
   && pip install --no-cache-dir celery==5.0.1 ${speed} \
-  && pip install --no-cache-dir django-celery-results==1.2.1 ${speed} \
+  && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
   && pip install --no-cache-dir django-celery-beat==2.1.0 ${speed} \
   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
-  && pip install --no-cache-dir pandas ${speed} \
+  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
   && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
