@@ -56,7 +56,7 @@ RUN echo "Begin" \
   && echo "********** 安装python包" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
-  && mkdir /whl && cd /whl && pip wheel pandas==1.1.3 ${speed} \
+  && mkdir /whl && cd /whl && pip wheel pandas ${speed} \
 ##  && pip install --no-cache-dir requests ${speed} \
 ##  && pip install --no-cache-dir Django==3.1.2 ${speed} \
 ##  && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
