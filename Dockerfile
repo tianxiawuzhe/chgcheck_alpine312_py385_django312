@@ -71,7 +71,7 @@ RUN echo "Begin" \
   && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
   && echo "********** 下载whl并安装" \
-  && QINIU_URL='http://pubftp.qn.fplat.cn' \
+  && QINIU_URL='http://pubftp.qn.fplat.cn/alpine3.12/' \
   && mkdir /whl && cd /whl \
   && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
   && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
