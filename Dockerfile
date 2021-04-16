@@ -33,7 +33,7 @@ ENV BUILD_PACKAGES="\
 
 ## running
 RUN echo "Begin" \
-  && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
+##  && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
   && echo "${TIMEZONE}" > /etc/timezone \
 ##  && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
 ##  && wget -O Dockerfile --timeout=30 -t 5 "${GITHUB_URL}/Dockerfile" \
@@ -56,7 +56,6 @@ RUN echo "Begin" \
   && echo "********** 安装python包" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
-##  && mkdir /whl && cd /whl && pip wheel pandas ${speed} \
   && pip install --no-cache-dir requests==2.25.1 ${speed} \
   && pip install --no-cache-dir Django==3.1.2 ${speed} \
   && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
@@ -65,8 +64,16 @@ RUN echo "Begin" \
   && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
   && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
-  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
+  && echo "********** 下载whl并安装" \
+  && GITEE_URL='https://gitee.com/cmbcgh/statistic/raw/master' \
+  && mkdir /whl && cd /whl \
+  && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
+#  && pip install --no-cache-dir sklearn==0.0 ${speed} \
+#  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
+
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
   && echo "End"
