@@ -19,6 +19,10 @@ ENV PACKAGES="\
   dumb-init tzdata bash vim tini ncftp busybox-extras \
   python3 \
   mysql-dev \
+  openblas \
+  libgomp \
+  lapack \
+  blas \
 "
 
 # These packages are not installed immediately, but are added at runtime or ONBUILD to shrink the image as much as possible. Notes:
@@ -29,11 +33,8 @@ ENV BUILD_PACKAGES="\
   build-base \
   linux-headers \
   python3-dev \
-  openblas \
   openblas-dev \
-  lapack \
   lapack-dev \
-  blas \
   blas-dev \
 "
 
