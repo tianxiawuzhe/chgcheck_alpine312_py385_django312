@@ -29,6 +29,12 @@ ENV BUILD_PACKAGES="\
   build-base \
   linux-headers \
   python3-dev \
+  openblas \
+  openblas-dev \
+  lapack \
+  lapack-dev \
+  blas \
+  blas-dev \
 "
 
 ## running
@@ -68,6 +74,7 @@ RUN echo "Begin" \
   && GITEE_URL='https://gitee.com/cmbcgh/statistic/raw/master' \
   && mkdir /whl && cd /whl \
   && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
   && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
   && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=60 -t 5 "${GITEE_URL}/${name}" && pip install --no-cache-dir ${name} \
 #  && pip install --no-cache-dir sklearn==0.0 ${speed} \
