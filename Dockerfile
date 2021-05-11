@@ -55,9 +55,10 @@ RUN echo "Begin" \
   && echo "********** 更新python信息" \
 ##  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && sed -i 's:mouse=a:mouse-=a:g' /usr/share/vim/vim82/defaults.vim \
-  && { [[ -e /usr/bin/python ]] || ln -sf /usr/bin/python3.8 /usr/bin/python; } \
+  && { [[ -e /usr/bin/python ]] || ln -sf /usr/bin/python3.8 /usr/bin/python } \
   && python -m ensurepip \
   && python -m pip install --upgrade --no-cache-dir pip \
+  && { [[ -e /usr/bin/pip ]] || ln -sf /usr/bin/pip3 /usr/bin/pip } \
   && cd /usr/bin \
   && ls -l python* pip* \
   && echo "********** 安装python包" \
