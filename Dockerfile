@@ -78,8 +78,8 @@ RUN echo "Begin" \
   && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
   && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
   && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
-#  && pip install --no-cache-dir sklearn==0.0 ${speed} \
-#  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
+  && pip install --no-cache-dir jieba==0.42.1 ${speed} \
+  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
